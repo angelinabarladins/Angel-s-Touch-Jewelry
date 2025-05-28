@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Герой-секция -->
+<section class="hero-section bg-light py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold mb-4">Эксклюзивные ювелирные украшения</h1>
+                <p class="lead mb-4">Уникальные изделия ручной работы из золота и серебра с драгоценными камнями</p>
+                <a href="#" class="btn btn-primary btn-lg px-4 me-2">Каталог</a>
+                <a href="#" class="btn btn-outline-secondary btn-lg px-4">Акции</a>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'images/hero-image.jpg' %}" alt="Ювелирные украшения" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Популярные категории -->
+<section class="categories-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Популярные категории</h2>
+        <div class="row">
+            {% for category in categories|slice:":4" %}
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <img src="{% static 'images/category-'|add:category.name|add:'.jpg' %}" class="card-img-top" alt="{{ category.name }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                        <a href="#" class="btn btn-outline-primary">Смотреть</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Хиты продаж -->
+<section class="featured-products py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Хиты продаж</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                    <img src="{% static 'images/no-image.jpg' %}" class="card-img-top" alt="Нет изображения">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.price }} руб.</p>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <a href="#" class="btn btn-primary w-100">В корзину</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- О нас -->
+<section class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'images/about.jpg' %}" alt="О нас" class="img-fluid rounded">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">О нашем магазине</h2>
+                <p>Мы - ювелирный магазин с 20-летней историей, предлагающий широкий ассортимент украшений из золота, серебра и платины с драгоценными и полудрагоценными камнями.</p>
+                <p>Все наши изделия проходят строгий контроль качества и имеют сертификаты подлинности.</p>
+                <a href="#" class="btn btn-outline-primary mt-3">Подробнее</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Преимущества -->
+<section class="benefits-section py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4">
+                <div class="benefit-icon mb-3">
+                    <i class="fas fa-gem fa-3x text-primary"></i>
+                </div>
+                <h4>Качество</h4>
+                <p>Используем только лучшие материалы</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="benefit-icon mb-3">
+                    <i class="fas fa-certificate fa-3x text-primary"></i>
+                </div>
+                <h4>Гарантия</h4>
+                <p>Гарантия на все изделия 2 года</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="benefit-icon mb-3">
+                    <i class="fas fa-truck fa-3x text-primary"></i>
+                </div>
+                <h4>Доставка</h4>
+                <p>Быстрая доставка по всей России</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="benefit-icon mb-3">
+                    <i class="fas fa-percent fa-3x text-primary"></i>
+                </div>
+                <h4>Рассрочка</h4>
+                <p>Удобные условия рассрочки</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
