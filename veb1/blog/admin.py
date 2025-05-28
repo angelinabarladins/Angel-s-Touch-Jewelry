@@ -145,5 +145,11 @@ class ReviewAdmin(admin.ModelAdmin):
     list_editable = ['is_published']
     date_hierarchy = 'created_at'
 
-form = ProductAdminForm  # для ProductAdmin
-form = OrderAdminForm    # для OrderAdmin
+class abExamAdmin(admin.ModelAdmin):
+    list_display = ('name', 'exam_date', 'is_public')
+    search_fields = ('name', 'users__email')
+    list_filter = ('is_public', 'created_at')
+    date_hierarchy = 'exam_date'
+    filter_horizontal = ('users',)
+
+admin.site.register(abExam, abExamAdmin)
