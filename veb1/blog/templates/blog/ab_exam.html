@@ -1,0 +1,32 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>abExam</title>
+</head>
+<body>
+    <h1>{{ fio }}</h1>
+    <h2>Список опубликованных экзаменов:</h2>
+    {% if exams %}
+        <ul>
+            {% for exam in exams %}
+                <li>
+                    <strong>Название:</strong> {{ exam.name }}<br>
+                    <strong>Дата создания:</strong> {{ exam.created_at }}<br>
+                    <strong>Дата проведения:</strong> {{ exam.exam_date }}<br>
+                    <strong>Задание:</strong> <img src="" alt="Задание по экзамену" width="200"><br>
+                    <strong>Пользователи:</strong>
+                    <ul>
+                        {% for user in exam.users.all %}
+                            <li>{{ user.username }} ({{ user.email }})</li>
+                        {% endfor %}
+                    </ul>
+                    <strong>Опубликовано:</strong> {% if exam.is_public %}Да{% else %}Нет{% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет опубликованных экзаменов.</p>
+    {% endif %}
+</body>
+</html>
